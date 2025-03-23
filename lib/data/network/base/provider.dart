@@ -4,23 +4,28 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
-import 'package:jsnavineo_app/api/base/exception.dart';
-import 'package:jsnavineo_app/api/base/interceptor.dart';
-import 'package:jsnavineo_app/api/base/param.dart';
-import 'package:jsnavineo_app/config/environment.dart';
-import 'package:jsnavineo_app/database/share_preferences/share_preferences_utils.dart';
-import 'package:jsnavineo_app/firebase/app_analytic.dart';
-import 'package:jsnavineo_app/utils/map.dart';
 import 'package:sample_bloc/config/environment.dart';
+import 'package:sample_bloc/data/network/base/param.dart';
 
+import 'exception.dart';
 import 'interceptor.dart';
 
 class ApiProvider {
-  ApiProvider() {
+  static final ApiProvider instance = ApiProvider._internal();
+
+  ApiProvider._internal();
+
+  factory ApiProvider() {
+    return instance;
+  }
+
+
+  Future<void> init() async {
     _dio.interceptors.add(CustomInterceptor());
     _dio.options.connectTimeout = const Duration(minutes: 1);
     configCharles();
   }
+
 
   final _dio = Dio();
 
@@ -44,7 +49,7 @@ class ApiProvider {
   String get _charlesIp {
     const charlesIp = String.fromEnvironment('CHARLES_PROXY_IP');
     if (charlesIp.isNotEmpty) return charlesIp;
-    return SharePreferenceUtils.instance.getCharlesIp();
+    return '';
   }
 
   Future<dynamic> requestApi({required ApiParam param}) async {
@@ -63,14 +68,9 @@ class ApiProvider {
       final response = await _dio.request<dynamic>(
         url,
         data: param.data ?? data,
-        queryParameters: (param.queryParameters ?? queryParameters)?..validation(),
+        queryParameters: (param.queryParameters ?? queryParameters),
         options: param.options,
       );
-
-      if (mustReturnResponseApis.contains(param.name)) {
-        return response;
-      }
-
       return response.data;
     } on SocketException catch (e) {
       debugPrint(e.message);

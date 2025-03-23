@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc/presentation/screen/splash/splash.dart';
+import 'package:sample_bloc/presentation/screen/app/app_page_route.dart';
+import 'package:sample_bloc/presentation/screen/detail/detail_page_route.dart';
+import 'package:sample_bloc/presentation/screen/login/login_page_route.dart';
+import 'package:sample_bloc/presentation/screen/menu1/menu1_page_route.dart';
+import 'package:sample_bloc/presentation/screen/menu2/menu2_page_route.dart';
+import 'package:sample_bloc/presentation/screen/splash/splash_page.dart';
+import 'package:sample_bloc/routes/base/ss_page_route.dart';
 import 'package:sample_bloc/utils/extension_list.dart';
-
-abstract class AAppRoute<T> {
-  Route createRoute(RouteSettings settings) {
-    throw UnimplementedError();
-  }
-}
 
 enum AppRoute {
   splash('/splash'),
   login('/login'),
   appTab('/appTab'),
-  menu1('/home'),
-  menu2('/storeSelection'),
-  menu3('/errorDialog');
+  menu1('/menu1'),
+  menu2('/menu2'),
+  detail('detail');
 
   const AppRoute(this.rawValue);
 
@@ -25,55 +25,23 @@ enum AppRoute {
 
   static Route? onGenerateRoute(RouteSettings settings) {
     final name = AppRoute.getScreenNameByString(settings.name ?? '');
+    debugPrint("--- name $name");
     if (name == null) {
       return null;
     }
     switch (name) {
       case AppRoute.splash:
-        return PageRouteBuilder(pageBuilder: (_, _, _) =>  Splash());
+        return SSPageRoute(page: SplashPage());
       case AppRoute.login:
-        return LoginRoute().createRoute(settings);
+        return LoginPageRoute(settings).pageRoute;
       case AppRoute.appTab:
-        return AppTabRoute().createRoute(settings);
-      case AppRoute.home:
-        return ChainStoreRoute().createRoute(settings);
-      case AppRoute.storeSelection:
-        return StoreSelectionRoute().createRoute(settings);
-      case AppRoute.blank:
-        return MBBlankRoute().createRoute(settings);
-      case AppRoute.setting:
-        return SettingRoute().createRoute(settings);
-      case AppRoute.errorDialog:
-        // it's a dialog, not screen
-        return null;
-      case AppRoute.storeSummary:
-        return StoreSummaryRoute().createRoute(settings);
-      case AppRoute.storeSummaryPicker:
-        return null;
-      case AppRoute.enterNotes:
-        return EnterNotesRoute().createRoute(settings);
-      case AppRoute.licence:
-        return LicenceRoute().createRoute(settings);
-      case AppRoute.licenceDetail:
-        return LicenceDetailRoute().createRoute(settings);
-      case AppRoute.c01webview:
-        return C01WebviewRoute().createRoute(settings);
-      case AppRoute.b032Entered:
-        return B032Route().createRoute(settings);
+        return AppPageRoute(settings).pageRoute;
+      case AppRoute.menu1:
+        return Menu1PageRoute(settings).pageRoute;
+      case AppRoute.menu2:
+        return Menu2PageRoute(settings).pageRoute;
+      case AppRoute.detail:
+        return DetailPageRoute(settings).pageRoute;
     }
   }
-
-  static Duration getDuration(Transition transition) {
-    if (transition == Transition.noTransition) {
-      return const Duration(milliseconds: 0);
-    } else {
-      return const Duration(milliseconds: 300);
-    }
-  }
-
-  static String get currentRouteName =>
-      Get.routing.route?.settings.name ?? Get.routing.current;
-
-  static bool get isDialogNotShowing =>
-      AppRoute.getScreenNameByString(currentRouteName) != AppRoute.errorDialog;
 }

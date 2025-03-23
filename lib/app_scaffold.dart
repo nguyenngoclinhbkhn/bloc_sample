@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sample_bloc/routes/app_navigate.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
@@ -12,7 +13,7 @@ class AppScaffold extends StatelessWidget {
     this.leading,
     this.trailings,
     this.fullscreen = true,
-    this.backgroundColor,
+    this.backgroundColor = Colors.white,
     this.foregroundColor,
     this.back = true,
     this.backWidget,
@@ -30,7 +31,7 @@ class AppScaffold extends StatelessWidget {
   final Widget? leading;
   final List<Widget>? trailings;
   final bool fullscreen;
-  final Color? backgroundColor;
+  final Color backgroundColor;
   final Color? foregroundColor;
   final Color? appbarColor;
   final bool back;
@@ -56,12 +57,12 @@ class AppScaffold extends StatelessWidget {
               ? leading!
               : back
               ? IconButton(
-                icon: Image.asset('name'),
+                icon: Icon(Icons.arrow_back),
                 onPressed: () {
                   if (onBackPress != null) {
                     onBackPress?.call();
                   } else {
-                    /// TODO Back default
+                    AppNavigate.instance.back();
                   }
                 },
               )

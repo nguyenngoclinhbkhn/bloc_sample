@@ -1,12 +1,13 @@
 import 'package:flutter_flavor/flutter_flavor.dart';
 import 'package:sample_bloc/utils/extension_list.dart';
 
-enum FlavorValue { dev, prod }
+enum FlavorValue { dev, stg, prod }
 
 extension FlavorValueEx on FlavorValue {
   bool get supportCharles {
     switch (this) {
       case FlavorValue.dev:
+      case FlavorValue.stg:
         return true;
       case FlavorValue.prod:
         return false;
@@ -25,6 +26,8 @@ extension Environment on FlavorValue {
     switch (this) {
       case FlavorValue.dev:
         return 'dev';
+      case FlavorValue.stg:
+        return 'stg';
       case FlavorValue.prod:
         return 'prod';
     }
@@ -33,9 +36,11 @@ extension Environment on FlavorValue {
   Map<String, String> get _variables {
     switch (this) {
       case FlavorValue.dev:
-        return {_baseUrl: 'https://t-mks47.d-deltanet.com'};
+        return {_baseUrl: 'https:dev'};
+      case FlavorValue.stg:
+        return {_baseUrl: 'https:stg'};
       case FlavorValue.prod:
-        return {_baseUrl: 'https://mks47.d-deltanet.com'};
+        return {_baseUrl: 'https:prod'};
     }
   }
 

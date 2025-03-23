@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:jsnavineo_app/database/share_preferences/share_preferences_utils.dart';
-import 'package:jsnavineo_app/utils/map.dart';
+import 'package:sample_bloc/config/environment.dart';
 
 abstract class ApiParam {
   ApiName get name;
@@ -17,13 +16,7 @@ abstract class ApiParam {
 
   List<int> get validateStatus => [HttpStatus.ok];
 
-  String get url {
-    final url = SharePreferenceUtils.instance.getUrl();
-    if (!Uri.parse(url).isAbsolute) {
-      throw Exception("Base URL '$url' is not absolute");
-    }
-    return url;
-  }
+  String get url => Environment.baseUrl;
 }
 
 extension ApiParamExt on ApiParam {

@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'config/environment.dart';
 import 'main.dart';
 
-void main() {
+void main() async {
   Environment.configFlavor(FlavorValue.prod);
+  await initService();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('ja', 'JP')],

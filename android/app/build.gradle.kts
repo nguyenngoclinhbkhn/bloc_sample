@@ -30,11 +30,60 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+//        create("key_release") {
+//            try {
+//                storeFile = file(keystoreProperties.getProperty("store_file"))
+//                storePassword = keystoreProperties.getProperty("store_password")
+//                keyAlias = keystoreProperties.getProperty("key_alias")
+//                keyPassword = keystoreProperties.getProperty("key_alias_password")
+//                println("Config KeyStore Success")
+//            } catch (e: Exception) {
+//                throw Exception("Config key_store failure $e")
+//            }
+//        }
+
+//        create("key_debug") {
+//            try {
+//                storeFile = file(keystoreProperties.getProperty("store_file"))
+//                storePassword = keystoreProperties.getProperty("store_password")
+//                keyAlias = keystoreProperties.getProperty("key_alias")
+//                keyPassword = keystoreProperties.getProperty("key_alias_password")
+//                println("Config KeyStore Success")
+//            } catch (e: Exception) {
+//                throw Exception("Config key_store failure $e")
+//            }
+//        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+//            signingConfig = signingConfigs.getByName("key_release")
+        }
+
+        debug {
+//            signingConfig = signingConfigs.getByName("key_debug")
+        }
+    }
+
+    flavorDimensions += "ss_dimension"
+    productFlavors {
+        create("dev") {
+            isDefault = true
+            applicationId = "com.example.sample_bloc.dev"
+            resValue("string", "app_name", "Base-DEV")
+        }
+
+        create("stg") {
+            applicationId = "com.example.sample_bloc.stg"
+            resValue("string", "app_name", "Base-STG")
+        }
+
+        create("product") {
+            applicationId = "com.example.sample_bloc"
+            resValue("string", "app_name", "Base")
         }
     }
 }

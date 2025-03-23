@@ -6,7 +6,7 @@ import 'config/environment.dart';
 import 'main.dart';
 
 void main() async {
-  Environment.configFlavor(FlavorValue.dev);
+  Environment.configFlavor(FlavorValue.stg);
   await initService();
   runApp(
     EasyLocalization(
