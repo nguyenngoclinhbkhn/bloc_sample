@@ -5,7 +5,9 @@ import 'package:sample_bloc/presentation/screen/dialog/dialog.dart';
 import 'package:sample_bloc/routes/app_route.dart';
 
 abstract class Navigate {
-  NavigatorState get navigateState;
+  GlobalKey<NavigatorState> get key;
+
+  NavigatorState get navigateState => key.currentState!;
 
   bool get canPop => navigateState.canPop();
 

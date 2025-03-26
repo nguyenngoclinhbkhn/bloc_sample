@@ -1,3 +1,5 @@
+import 'package:sample_bloc/data/network/base/provider.dart';
 
-class ApiRepository {
+mixin ApiRepository {
+  final provider = ApiProvider();
 }

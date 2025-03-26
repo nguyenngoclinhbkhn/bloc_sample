@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc/app_scaffold.dart';
+import 'package:sample_bloc/presentation/app_scaffold.dart';
 import 'package:sample_bloc/data/local/sqlite/entity/user_entity.dart';
 import 'package:sample_bloc/data/local/sqlite/sqflite_utils.dart';
 import 'package:sample_bloc/routes/app_navigate.dart';

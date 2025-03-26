@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc/app_scaffold.dart';
+import 'package:sample_bloc/presentation/app_scaffold.dart';
 
 class DetailPage extends StatelessWidget {
   const DetailPage({super.key});

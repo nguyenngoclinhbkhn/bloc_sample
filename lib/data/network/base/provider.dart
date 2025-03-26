@@ -20,14 +20,9 @@ class ApiProvider {
   }
 
 
-  Future<void> init() async {
-    _dio.interceptors.add(CustomInterceptor());
-    _dio.options.connectTimeout = const Duration(minutes: 1);
-    configCharles();
-  }
-
-
-  final _dio = Dio();
+  final _dio = Dio()
+    ..interceptors.add(CustomInterceptor())
+    ..options.connectTimeout = const Duration(minutes: 1);
 
   Future<void> configCharles() async {
     if (!Environment.flavor.supportCharles) return;

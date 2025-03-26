@@ -31,7 +31,11 @@ extension ApiParamExt on ApiParam {
     switch (name) {
       case ApiName.getByte:
         return ResponseType.bytes;
-      case _:
+      case ApiName.get:
+      case ApiName.post:
+      case ApiName.put:
+      case ApiName.delete:
+      case ApiName.postsGet:
         return null;
     }
   }
@@ -40,6 +44,7 @@ extension ApiParamExt on ApiParam {
     switch (name) {
       case ApiName.get:
       case ApiName.getByte:
+      case ApiName.postsGet:
         return Method.get;
       case ApiName.post:
         return Method.post;
@@ -59,12 +64,11 @@ extension ApiParamExt on ApiParam {
   String? get contentType {
     switch (name) {
       case ApiName.get:
+      case ApiName.getByte:
       case ApiName.post:
       case ApiName.put:
       case ApiName.delete:
-        return null;
-
-      case _:
+      case ApiName.postsGet:
         return null;
     }
   }
@@ -87,4 +91,11 @@ class Method {
   static const String delete = 'delete';
 }
 
-enum ApiName { get, post, put, delete, getByte }
+enum ApiName {
+  get,
+  post,
+  put,
+  delete,
+  getByte,
+  postsGet,
+}

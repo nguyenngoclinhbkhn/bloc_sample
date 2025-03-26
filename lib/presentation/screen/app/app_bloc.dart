@@ -1,21 +1,26 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sample_bloc/data/network/base/repository.dart';
 import 'package:sample_bloc/routes/app_navigate.dart';
 
+/// Event
 abstract class AppEvent {}
 
+/// Action
 class AppChangeTab extends AppEvent {
   final int index;
 
   AppChangeTab(this.index);
 }
 
+/// State
 class AppState {
   final int currentIndex;
 
   AppState(this.currentIndex);
 }
 
+///Bloc
 class AppBloc extends Bloc<AppEvent, AppState> {
   AppBloc() : super(AppState(0)) {
     on<AppChangeTab>((event, emit) {

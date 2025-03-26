@@ -10,8 +10,6 @@ import 'package:sample_bloc/routes/app_navigate.dart';
 import 'package:sample_bloc/routes/app_route.dart';
 import 'package:sample_bloc/widget/loading/loading.dart';
 
-import 'config/environment.dart';
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -30,18 +28,18 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoute.splash.rawValue,
       onGenerateRoute: AppRoute.onGenerateRoute,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.red,
-        splashColor: Colors.blue,
-        highlightColor: Colors.green,
-        primaryColor: Colors.tealAccent,
-        colorScheme: const ColorScheme.light(primary: Colors.deepPurple),
+        scaffoldBackgroundColor: Colors.white,
+        splashColor: Colors.white,
+        highlightColor: Colors.white,
+        primaryColor: Colors.white,
+        colorScheme: const ColorScheme.light(primary: Colors.black),
         visualDensity: VisualDensity.adaptivePlatformDensity,
         dividerTheme: const DividerThemeData(
-          color: Colors.amber,
+          color: Colors.grey,
           thickness: 1,
           space: 1,
         ),
-        appBarTheme: const AppBarTheme(color: Colors.green),
+        appBarTheme: const AppBarTheme(color: Colors.white),
         useMaterial3: true,
       ),
       builder: (context, child) {
@@ -57,6 +55,6 @@ Future<void> initService() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await SharePreferenceUtils().init();
   await SqfliteUtils().init();
-  await ApiProvider().init();
+  await ApiProvider().configCharles();
   Loading.configLoading();
 }

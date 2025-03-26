@@ -8,6 +8,7 @@ class AppNavigate extends Navigate {
   static final applicationKey = GlobalKey<NavigatorState>();
   static final AppNavigate instance = AppNavigate._internal();
 
+  @override
   GlobalKey<NavigatorState> get key => applicationKey;
 
   factory AppNavigate() {
@@ -15,9 +16,6 @@ class AppNavigate extends Navigate {
   }
 
   AppNavigate._internal();
-
-  @override
-  NavigatorState get navigateState => applicationKey.currentState!;
 
   Future<dynamic> gotoLogin(LoginArgument argument) async {
     return replaceAndClearBackStack(route: AppRoute.login, argument: argument);
@@ -37,6 +35,7 @@ class NestedNavigate extends Navigate {
   static final nestedKey = GlobalKey<NavigatorState>();
   static final NestedNavigate instance = NestedNavigate._internal();
 
+  @override
   GlobalKey<NavigatorState> get key => nestedKey;
 
   factory NestedNavigate() {
@@ -45,8 +44,6 @@ class NestedNavigate extends Navigate {
 
   NestedNavigate._internal();
 
-  @override
-  NavigatorState get navigateState => nestedKey.currentState!;
 
   Future<void> gotoMenu1() async {
     return replace(route: AppRoute.menu1);

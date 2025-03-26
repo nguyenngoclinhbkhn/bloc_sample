@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:sample_bloc/gen/assets.gen.dart';
 
 class Loading {
   static Future<void> show() async {
@@ -16,7 +17,7 @@ class Loading {
     EasyLoading.instance
       ..indicatorWidget = _widgetLoadingCache()
       ..indicatorColor = Colors.red
-      ..maskColor = Colors.black.withAlpha(10)
+      ..maskColor = Colors.black.withAlpha(100)
       ..maskType = EasyLoadingMaskType.custom
       ..dismissOnTap = false
       ..animationStyle = EasyLoadingAnimationStyle.opacity
@@ -26,9 +27,8 @@ class Loading {
       ..textColor = Colors.white;
   }
 
-  static Widget _widgetLoadingCache() =>
-      Image.asset('assets/images/loading_2.gif');
+  static Widget _widgetLoadingCache() => Assets.images.loading2.image();
 
   static Widget _widgetLoadingNoCache() =>
-      Image.asset(key: UniqueKey(), 'assets/images/loading_2.gif');
+      Assets.images.loading2.image(key: UniqueKey());
 }

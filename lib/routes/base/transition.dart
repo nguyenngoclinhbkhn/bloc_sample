@@ -9,7 +9,7 @@ extension TransitionEx on TransitionType {
       case TransitionType.rightToLeft:
       case TransitionType.bottomToTop:
       case TransitionType.topToBottom:
-        return Duration(milliseconds: 1000);
+        return Duration(milliseconds: 300);
       case TransitionType.none:
         return Duration.zero;
     }

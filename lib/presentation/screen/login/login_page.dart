@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_bloc/app_scaffold.dart';
+import 'package:sample_bloc/presentation/app_scaffold.dart';
 import 'package:sample_bloc/presentation/screen/login/login_argument.dart';
 import 'package:sample_bloc/routes/app_navigate.dart';
 

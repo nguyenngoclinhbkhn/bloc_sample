@@ -36,7 +36,7 @@ extension Environment on FlavorValue {
   Map<String, String> get _variables {
     switch (this) {
       case FlavorValue.dev:
-        return {_baseUrl: 'https:dev'};
+        return {_baseUrl: 'https://jsonplaceholder.typicode.com/'};
       case FlavorValue.stg:
         return {_baseUrl: 'https:stg'};
       case FlavorValue.prod:
